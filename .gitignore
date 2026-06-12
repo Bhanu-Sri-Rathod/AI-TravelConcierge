@@ -1,0 +1,16 @@
+node_modules/
+frontend/node_modules/
+
+.next/
+frontend/.next/
+
+venv/
+backend/venv/
+
+.env
+.env.txt
+
+travel.db
+
+__pycache__/
+*.pyc
