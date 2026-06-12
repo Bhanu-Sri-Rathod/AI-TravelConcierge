@@ -61,8 +61,8 @@ Go to `http://localhost:3000`, register an account, start chatting!
 ## API Keys Used
 | API | Purpose | Key location |
 |-----|---------|-------------|
-| Gemini | LLM reasoning | `.env` GEMINI_API_KEY |
-| Groq | Fallback LLM | `.env` GROQ_API_KEY |
+| Gemini | LLM reasoning | `.env` GROQ_API_KEY |
+| Groq | Fallback LLM | `.env` GEMINI_API_KEY |
 | AviationStack | Flight data | `.env` AVIATIONSTACK_API_KEY |
 | OpenWeatherMap | Weather forecast | `.env` OPENWEATHER_API_KEY |
 | ExchangeRate | Currency conversion | `.env` EXCHANGE_API_KEY |
