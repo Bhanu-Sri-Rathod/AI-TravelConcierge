@@ -1,4 +1,4 @@
-# AI Travel Concierge 🌍✈️
+# AI Travel Concierge 🌍
 
 A full-stack AI travel assistant powered by **Groq + LangGraph + FastAPI + Next.js**.
 
