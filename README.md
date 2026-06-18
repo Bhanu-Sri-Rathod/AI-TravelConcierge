@@ -1,167 +1,137 @@
-# 🌍 AI Travel Concierge
+# AI Travel Concierge 🌍
 
-A full-stack AI-powered travel assistant built with **Groq, LangGraph, FastAPI, and Next.js**. The application helps users search flights, check weather forecasts, convert currencies, generate personalized itineraries, and explore destinations through an interactive map.
+A full-stack AI travel assistant powered by **Groq, LangGraph, FastAPI, and Next.js**. The application combines AI-driven reasoning with real-time travel data to help users plan trips, explore destinations, check weather conditions, search flights, convert currencies, and generate personalized travel itineraries through natural language conversations.
 
 ---
 
 ## ✨ Features
 
-### ✈️ Travel & Planning
-- Flight search using AviationStack API
-- 5-day weather forecasts via OpenWeatherMap
-- AI-generated day-by-day travel itineraries
-- Real Points of Interest (POI) data from OpenStreetMap
-- Currency conversion using ExchangeRate API
-- Destination recommendations and travel guidance
+### 🤖 AI-Powered Travel Assistant
 
-### 🗺️ Interactive Experience
-- Interactive maps powered by Leaflet and OpenStreetMap
-- No map API key required
-- Location visualization for attractions and destinations
+* LangGraph-based multi-agent workflow for intelligent travel planning
+* Groq LLaMA models for fast and accurate responses
+* Gemini integration as a fallback LLM
+* Context-aware travel recommendations and assistance
 
-### 🤖 AI-Powered Assistant
-- Intelligent query routing using LangGraph
-- Fast reasoning with Groq LLM
-- Gemini fallback for enhanced reliability
-- Streaming responses via Server-Sent Events (SSE)
-- Voice input support using the Web Speech API
+### ✈️ Travel Services
 
-### 🔐 User Management
-- JWT-based authentication
-- User registration and login
-- Save and manage trips
-- SQLite database integration
+* Flight search using AviationStack API
+* Personalized day-by-day itinerary generation
+* Destination recommendations and travel guidance
+* Best-time-to-visit suggestions
+
+### 🌦️ Real-Time Travel Data
+
+* 5-day weather forecasts using OpenWeatherMap
+* Currency conversion using ExchangeRate API
+* Location and point-of-interest data from OpenStreetMap
+* Interactive map visualization with Leaflet
+
+### 🎙️ Enhanced User Experience
+
+* Voice-enabled travel queries using Web Speech API
+* Real-time streaming responses via Server-Sent Events (SSE)
+* Interactive map integration
+* Responsive and user-friendly interface
+
+### 🔒 Authentication & Storage
+
+* JWT-based user authentication
+* Secure login and registration
+* Trip history management
+* SQLite database integration
 
 ---
 
 ## 🏗️ Architecture
 
 ```text
-User
-  │
-  ▼
-Next.js Frontend (React)
-  │
-  ▼
-FastAPI Backend
-  │
-  ▼
-LangGraph Agent
-  │
-  ├── Flight Agent      → AviationStack API
-  ├── Weather Agent     → OpenWeatherMap API
-  ├── Itinerary Agent   → OpenStreetMap API
-  ├── Currency Agent    → ExchangeRate API
-  └── General Agent     → Groq / Gemini
+┌─────────────────┐
+│      User       │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Next.js Frontend│
+│  (React + TS)   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ FastAPI Backend │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│  LangGraph Orchestrator │
+└────────┬────────────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│   Groq LLaMA (Primary)  │
+│   Gemini (Fallback)     │
+└────────┬────────────────┘
+         │
+ ┌───────┼────────┬──────────┬──────────┐
+ │       │        │          │          │
+ ▼       ▼        ▼          ▼          ▼
+
+✈️ Flight  🌦️ Weather  🗺️ Itinerary  💱 Currency
+
+ │          │          │          │
+ ▼          ▼          ▼          ▼
+
+Aviation   OpenWeather  OpenStreetMap  ExchangeRate
+Stack API     API           API           API
+
 ```
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Leaflet
+* OpenStreetMap
+* Web Speech API
+
+### Backend
+
+* FastAPI
+* Python
+* LangGraph
+* LangChain
+* SQLAlchemy
+* SQLite
+* JWT Authentication
+
+### AI & APIs
+
+* Groq (LLaMA Models)
+* Google Gemini
+* AviationStack API
+* OpenWeatherMap API
+* ExchangeRate API
+* OpenStreetMap API
 
 ---
 
-## 🚀 Getting Started
+## 📌 Example Queries
 
-### 1. Clone the Repository
-
-```bash
-git clone <repository-url>
-cd travel-concierge
-```
-
-### 2. Configure Environment Variables
-
-Create a `.env` file in the backend directory and add:
-
-```env
-GROQ_API_KEY=your_groq_api_key
-GEMINI_API_KEY=your_gemini_api_key
-AVIATIONSTACK_API_KEY=your_aviationstack_api_key
-OPENWEATHER_API_KEY=your_openweather_api_key
-EXCHANGE_API_KEY=your_exchange_api_key
-SECRET_KEY=your_secret_key
-```
+* "Find flights from Delhi to Dubai"
+* "What's the weather in Paris this week?"
+* "Plan a 5-day trip to Singapore"
+* "Convert 10,000 INR to USD"
+* "Best places to visit in Bali"
+* "Best time to visit Switzerland"
 
 ---
 
-### 3. Backend Setup
-
-```bash
-cd backend
-
-python -m venv venv
-
-# Linux / macOS
-source venv/bin/activate
-
-# Windows
-venv\Scripts\activate
-
-pip install -r requirements.txt
-
-python main.py
-```
-
-Backend runs at:
-
-```text
-http://localhost:8000
-```
-
----
-
-### 4. Frontend Setup
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
-
-Frontend runs at:
-
-```text
-http://localhost:3000
-```
-
----
-
-### 5. Launch the Application
-
-Open your browser and visit:
-
-```text
-http://localhost:3000
-```
-
-Create an account, log in, and start planning your next trip.
-
----
-
-## 🔑 API Integrations
-
-| Service | Purpose |
-|----------|----------|
-| Groq | Primary LLM reasoning |
-| Gemini | Fallback LLM |
-| AviationStack | Flight information |
-| OpenWeatherMap | Weather forecasts |
-| ExchangeRate API | Currency conversion |
-| OpenStreetMap | Maps, geocoding, and POI data |
-
----
-
-## 💬 Example Queries
-
-- "Find flights from DEL to DXB"
-- "What's the weather in Paris next week?"
-- "Plan a 4-day trip to Singapore"
-- "Convert 5000 INR to EUR"
-- "Best time to visit Maldives"
-- "Visa requirements for Indian passport holders visiting Japan"
-
----
-
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```text
 travel-concierge/
@@ -191,48 +161,12 @@ travel-concierge/
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Key Highlights
 
-### Frontend
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- Leaflet
-- OpenStreetMap
-
-### Backend
-- FastAPI
-- Python
-- SQLAlchemy
-- SQLite
-- JWT Authentication
-
-### AI & Agent Framework
-- Groq
-- Gemini
-- LangGraph
-- LangChain
-
----
-
-## 💡 Why AI Travel Concierge?
-
-Planning a trip often requires switching between multiple platforms for flights, weather forecasts, maps, currency conversion, and itinerary planning. AI Travel Concierge brings all these services together into a single intelligent assistant that provides personalized travel recommendations and real-time information through a conversational interface.
-
----
-
-## 🎯 Future Enhancements
-
-- Hotel and accommodation recommendations
-- Multi-city trip planning
-- Budget optimization suggestions
-- Personalized travel preferences
-- Real-time flight tracking
-- Travel expense management
-
----
-
-## 🌍 Travel Smarter with AI
-
-AI Travel Concierge combines modern AI agents, real-time travel data, and interactive mapping to deliver a seamless travel planning experience—all from a single chat interface.
+* Multi-agent AI architecture using LangGraph
+* Full-stack implementation with FastAPI and Next.js
+* Real-time travel data integration through multiple APIs
+* Voice-enabled travel assistant experience
+* Interactive maps and itinerary planning
+* Secure authentication and trip management
+* Scalable and modular architecture for future enhancements
